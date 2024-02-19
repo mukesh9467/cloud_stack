@@ -1,0 +1,21 @@
+<!-- admin_config.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Config Page</title>
+</head>
+<body>
+    
+    {% include 'header.html' %}
+
+    <h1>Welcome {{ user.username }}</h1>
+    <p>You are logged in as an admin.</p>
+    
+    <!-- Link to create new user -->
+    <a href="{{ url_for('create_new_user_form') }}">Create New User</a>
+
+    <!-- Other content of the admin config page -->
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to CloudStack</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            margin: 50px auto;
+            width: 300px;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        input[type="text"],
+        input[type="password"],
+        button {
+            display: block;
+            width: calc(100% - 20px); 
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: rgb(247, 159, 15);
+            color: #fff;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+        button:hover {
+            background-color: rgb(255, 100, 15);
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+        }
+        .form-title {
+           text-align: center; 
+           color: white;
+           margin-bottom: 0px; /* Adjust the margin as needed */
+        }
+        .header {
+            background-color: rgb(247, 159, 15); 
+            padding: 20px;
+            text-align: center; 
+            border-radius: 5px 5px 0 0;
+        }
+
+        .logo {
+            display: block; 
+            margin: 0 auto 10px; 
+            max-width: 85%; 
+            height: auto; 
+        }
+
+    </style>
+</head>
+<body>
+    <form id="loginForm">
+        <div class="header">
+            <img class="logo" src="../static/images/cloudstack.png" alt="Logo">
+            <h2 class="form-title">Login</h2>
+        </div>
+        <input type="text" id="username" name="username" placeholder="Username" required>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+        <!-- Error message for displaying login error -->
+        <p class="error-message" id="errorMessage"></p>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const errorMessage = document.getElementById('errorMessage');
+
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const formData = new FormData(loginForm);
+                fetch('/login', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to login');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        // Display error message if authentication failed
+                        errorMessage.textContent = data.error;
+                    } else {
+                        // Redirect to the index page upon successful login
+                        window.location.href = data.redirect_url;
+                    }
+                })
+                .catch(error => {
+                    // Display generic error message if request failed
+                    errorMessage.textContent = error.message || 'An error occurred';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

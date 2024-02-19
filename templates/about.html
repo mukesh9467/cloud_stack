@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About CloudStack</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgb(247, 159, 15);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .logo {
+            margin-bottom: 20px;
+            max-width: 55%;
+        }
+    </style>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <div class="container">
+        <img class="logo" src="../static/images/cloudstack.png" alt="CloudStack Logo">
+        <p><strong>CloudStack Version:</strong> 0.1</p>
+        <p><strong>Developed & maintained by:</strong> Mukesh Singh (<a href="mailto:it.mukesh@gmail.com">it.mukesh@gmail.com</a>)</p>
+    </div>
+</body>
+</html>

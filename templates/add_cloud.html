@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudStack Configuration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="container">
+        <h1>Add Cloud Credentials</h1>
+        <form action="{{ url_for('cloud_credentials') }}" method="post">
+            <label for="cloud_provider">Cloud Provider:</label>
+            <input type="text" id="cloud_provider" name="cloud_provider" required>
+            <label for="credential_name">Credential Name:</label>
+            <input type="text" id="credential_name" name="credential_name" required>
+            <label for="access_key">Access Key:</label>
+            <input type="text" id="access_key" name="access_key" required>
+            <label for="secret_key">Secret Key:</label>
+            <input type="password" id="secret_key" name="secret_key" required>
+            <button type="submit">Add Credentials</button>
+        </form>
+    </div>
+</body>
+</html>

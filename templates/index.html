@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CloudStack Provisioning Platform</title>
+    <style>
+        .cloud-providers {
+            display: flex;
+            justify-content: center;
+            margin-top: 250px;
+        }
+        .cloud-providers a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 20px;
+			margin-right: 50px;
+            color: #000;
+            text-decoration: none;
+            font-family: 'Calibri';
+            font-size: 20px;
+            text-align: center;
+        }
+        .cloud-providers img {
+            width: 250px; 
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <div class="cloud-providers">
+        <a href="aws_prov_form.html">
+		    <span style="font-size: 25px; font-weight: bold">AWS</span> 
+            <img src="../static/images/aws.png" alt="Amazon Web Services">
+        </a>
+        <a href="azure_prov_form.html">
+            <span style="font-size: 25px; font-weight: bold;">Azure</span>
+			<img src="../static/images/azure.png" alt="Microsoft Azure">
+        </a>
+        <a href="gcp_prov_form.html">
+            <span style="font-size: 25px; font-weight: bold;">GCP</span> 
+			<img src="../static/images/gcp.png" alt="Google Cloud Platform">
+        </a>
+    </div>
+
+    <script>
+        const options = document.getElementById("options");
+
+        function toggleOptions() {
+            options.classList.toggle("active");
+        }
+
+        document.addEventListener('click', function(event) {
+            const target = event.target;
+            const isProvisioningLink = target.matches('.header-links a');
+            const isInsideOptions = options.contains(target);
+
+            if (!isProvisioningLink && !isInsideOptions) {
+                options.classList.remove("active");
+            }
+        });
+    </script>
+</body>
+</html>

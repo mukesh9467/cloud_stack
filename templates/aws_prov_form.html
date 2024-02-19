@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CloudStack - AWS Provisioning Platform</title>
+    <style>
+        body {
+            font-family: 'Calibri';
+            font-size: 15px;
+            margin: 0;
+            padding: 0;
+            font-weight: bold;
+            overflow-x: auto;
+        }
+        #form-container {
+            width: 40%;
+            margin: auto;
+            margin-top: 10px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+        td {
+            padding: 5px;
+        }
+        th {
+            background-color: rgb(247, 159, 15);
+            color: #ffffff;
+            text-align: center;
+            font-size: 25px; 
+            font-family: 'Calibri'; 
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: none; 
+            border-bottom: 3px solid #ddd; 
+            background-color: #ecf0f1;
+
+        }
+        button {
+            padding: 10px;
+            background-color: #45a049;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin: 0 auto;
+            display: block; 
+        }
+        td input {
+            margin-top: 1px; 
+            margin-bottom: 10px; 
+        }
+        td button {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+{% include 'header.html' %}
+
+    <div id="form-container">
+        <form id="provisionForm">
+            <table>
+                <tr>
+                    <th>AWS Virtual Machine Provisioning</th>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Cloud Provider*</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="cloudProvider" required></td>
+                </tr>
+                <tr>
+                    <td>Account*</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="account" required></td>
+                </tr>
+                <tr>
+                    <td>Region*</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="region" required></td>
+                </tr>
+                <tr>
+                    <td>Operating System*</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="os" required></td>
+                </tr>
+                <tr>
+                    <td>OS Version*</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="osVersion" required></td>
+                </tr>
+                <tr>
+                    <td>Instance Type*</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="instanceType" required></td>
+                </tr>
+                <tr>
+                    <td>Network*</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="network" required></td>
+                </tr>
+                <tr>
+                    <td>Subnet*</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="subnet" required></td>
+                </tr>
+                <tr>
+                    <td>Security Group*</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="securityGroup" required></td>
+                </tr>
+                <tr>
+                    <td>Key Pair Name*</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="keyPair" required></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" onclick="submitForm()" style="font-weight: bold;">Submit</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    
+    
+    <script>
+        function submitForm() {
+            // Add your form submission logic here
+            console.log("Form submitted!");
+        }
+    </script>
+	
+	<script>	
+		const options = document.getElementById("options");
+
+        function toggleOptions() {
+            options.classList.toggle("active");
+        }
+
+        document.addEventListener('click', function(event) {
+            const target = event.target;
+            const isProvisioningLink = target.matches('.header-links a');
+            const isInsideOptions = options.contains(target);
+
+            if (!isProvisioningLink && !isInsideOptions) {
+                options.classList.remove("active");
+            }
+        });
+    </script>
+
+    <script>
+        function submitForm() {
+            // Get form data
+            const formData = {
+                cloudProvider: document.getElementsByName("cloudProvider")[0].value,
+                account: document.getElementsByName("account")[0].value,
+                region: document.getElementsByName("region")[0].value,
+                os: document.getElementsByName("os")[0].value,
+                osVersion: document.getElementsByName("osVersion")[0].value,
+                instanceType: document.getElementsByName("instanceType")[0].value,
+                network: document.getElementsByName("network")[0].value,
+                subnet: document.getElementsByName("subnet")[0].value,
+                securityGroup: document.getElementsByName("securityGroup")[0].value,
+                keyPair: document.getElementsByName("keyPair")[0].value,
+            };
+
+            // Convert to JSON
+            const jsonData = JSON.stringify(formData, null, 2);
+
+            // Save to a JSON file
+            const blob = new Blob([jsonData], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'provisioning_data.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            // Display a popup message
+            alert('Order submitted successfully!');
+
+            // Reset the form
+            document.getElementById('provisionForm').reset();
+        }
+
+    </script>
+
+</body>
+</html>

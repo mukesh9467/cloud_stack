@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CloudStack Provisioning Platform</title>
+<style>
+body {
+    margin: 0;
+    overflow-x: hidden;
+    font-family: 'Calibri', sans-serif;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(247, 159, 15);
+    padding: 20px;
+}
+.header img {
+    height: 70px;
+    margin-left: 20px;
+}
+.header-links {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+}
+.header-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Calibri';
+    font-size: 25px;
+    cursor: pointer; 
+    margin-right: 25px; 
+}
+.header-links a:last-child {
+    margin-right: 0; 
+}
+.options {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px); 
+    left: 0; 
+    background-color: rgb(247, 159, 15);
+    padding: 20px;
+    
+}
+.options.active {
+    display: block;
+}
+.options a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Calibri';
+    font-size: 20px;
+    margin-top: 5px;
+    padding-left: 20px; 
+}
+.userr {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: rgb(247, 159, 15);
+    padding: 10px;
+    border-radius: 5px; 
+}
+.userr.active {
+    display: block;
+}
+.userr a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Calibri';
+    font-size: 20px;
+    margin-top: 5px;
+    padding-left: 20px; 
+}
+.userr-icon {
+    cursor: pointer;
+    margin-left: 20px;
+    position: relative;
+}
+.userr-icon img {
+    height: 45px;
+}
+.config-dropdown {
+    position: relative;
+}
+
+.config-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: rgb(247, 159, 15);
+    padding: 10px;
+    border-radius: 5px; 
+}
+
+.config-options.active {
+    display: block;
+}
+.config-options a {
+        font-size: 15px; /* Adjust the font size as needed */
+    }
+</style>
+</head>
+<body>
+<div class="header">
+    <img id="logo" src="../static/images/cloudstack.png" alt="CloudStack Logo">
+    <div class="header-links" id="headerLinks">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="#" onclick="toggleOptions()">Provisioning</a>
+        <div class="options" id="options">
+            <a href="{{ url_for('provision', cloud_provider='aws') }}"><img src="../static/images/aws.png" alt="AWS Logo"></a>
+            <a href="{{ url_for('provision', cloud_provider='azure') }}"><img src="../static/images/azure.png" alt="Azure Logo"></a>
+            <a href="{{ url_for('provision', cloud_provider='gcp') }}"><img src="../static/images/gcp.png" alt="GCP Logo"></a>
+        </div>
+        
+
+        <div class="config-dropdown">
+            <a href="#" onclick="toggleConfigOptions()">Config</a>
+            <div class="config-options" id="configOptions">
+                <a href="{{ url_for('create_new_user_form') }}">Create User</a>
+                <a href="{{ url_for('users') }}">All Users</a>
+                <a href="#">Cloud Account</a>
+            </div>
+        </div>
+
+
+        <a href="{{ url_for('about') }}">About</a>
+        
+        <div class="userr-icon" id="userr-icon">
+        <a href="#" onclick="toggleUserDropdown()"><img src="../static/images/user_icon.png" alt="User"></a>
+        <div class="userr" id="userr">
+            <a href="#">{{ user.username }}</a>
+            <a href="{{ url_for('logout') }}">Log out</a>
+         </div>
+    </div>
+</div>
+</div>
+
+<script>
+    // Function to toggle the visibility of the options dropdown
+    function toggleOptions() {
+        var options = document.getElementById("options");
+        options.classList.toggle("active");
+    }
+
+    // Function to toggle the visibility of the userr dropdown
+    function toggleUserDropdown() {
+    var userDropdown = document.getElementById("userr");
+    userDropdown.classList.toggle("active");
+}
+function toggleConfigOptions() {
+    var configOptions = document.getElementById("configOptions");
+    configOptions.classList.toggle("active");
+    }
+</script>
+</body>
+</html>
