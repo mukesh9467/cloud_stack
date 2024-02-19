@@ -92,6 +92,11 @@ def login():
 def home():
     return render_template('index.html', user=current_user)
 
+@app.route('/index')
+@login_required
+def index():
+    return render_template('index.html', user=current_user)
+
 # Define route to render the pages for all cloud providers
 @app.route('/provision/<cloud_provider>')
 @login_required
