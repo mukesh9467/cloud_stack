@@ -88,9 +88,8 @@ def login():
         return jsonify({'error': 'Invalid username or password', 'redirect_url': url_for('login_prompt')})
 
 # Define route to render the Home page
-@app.route('/index')
-@login_required
-def index():
+@app.route('/home')
+def home():
     return render_template('index.html', user=current_user)
 
 # Define route to render the pages for all cloud providers
