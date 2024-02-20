@@ -97,6 +97,10 @@ def home():
 def index():
     return render_template('index.html', user=current_user)
 
+@app.route('/about')
+def about():
+    return render_template('about.html', user=current_user)
+
 # Define route to render the pages for all cloud providers
 @app.route('/provision/<cloud_provider>')
 @login_required
